@@ -48,18 +48,21 @@ class TTT
     {
 	System.out.print("It is Player " + turn + "'s turn. Move: ");
 	int move = scanner.nextInt();
-	//if(!isLegalMove(move))
-	char moveChar;
-	if(turn == 1)
-	    {
+    char moveChar;
+	if(!isLegalMove(move))
+    {
+        System.out.println("That move is not legal. Try again.");
+        makeMove(turn);
+    }
+    else
+    {
+        if(turn == 1){
 		moveChar = 'X';
-	    }
-	else
-	    {
+        }else{
 		moveChar = 'O';
-	    }
-	board[(move-1)] = moveChar;
-	
+        }
+    board[(move-1)] = moveChar;
+    }
     }
     // Return true if the move is legal, given the current boar[]
     private boolean isLegalMove(int move)
