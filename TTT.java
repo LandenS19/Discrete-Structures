@@ -39,6 +39,9 @@ class TTT
 		makeMove(turn); // Player makes a  move
 		turn = 3 - turn;
             }
+    // Game is over, print the final board
+    printBoard();
+    System.out.println("Game over!");
     }
 
     /**
@@ -79,7 +82,14 @@ class TTT
 
     private boolean gameOver()
     {
-	return false;
+	for(int i = 1; i < board.length + 1; i++)
+        {
+            if(isLegalMove(i))
+            {
+                return false;
+            }
+        }
+    return true;
     }
 
 
