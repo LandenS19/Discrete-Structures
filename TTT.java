@@ -37,7 +37,7 @@ class TTT
 	    {
 		printBoard();
 		makeMove(turn); // Player makes a  move
-		isThereAWinner();
+		isThereAWinner(turn);
 		turn = 3 - turn;
             }
     // Game is over, print the final board
@@ -82,20 +82,26 @@ class TTT
 	    }
     }
 
-    private int isThereAWinner()
+    private int isThereAWinner(int turn)
     {
-	//winnner
+    char c;
+    if (turn == 1) {
+        c = 'X';
+    } else {
+        c = 'O';
+    }
+    //winnner
 	//return 1 or 2
-	
+	// check(c);
 	// game still going
 	// return 0
 	for(int i = 0; i < 9; i++)
 	    {
-		if(board[i] == '') return 0;
+		if(board[i] == '-') return 0;
 	    }
 	// game over/ tie
 	// return 3
-	
+	return 3;
     }
 
     
@@ -111,7 +117,6 @@ class TTT
 	System.out.println(board[0] + "|" + board[1] + "|" + board[2] + "\n"
 			  + board[3] + "|" + board[4] + "|" +board[5] + "\n"
 			  + board[6] + "|" + board[7] + "|" + board[8] );
-    }
-       
+    }       
 
 }
