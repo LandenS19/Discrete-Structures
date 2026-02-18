@@ -37,6 +37,7 @@ class TTT
 	    {
 		printBoard();
 		makeMove(turn); // Player makes a  move
+		isThereAWinner();
 		turn = 3 - turn;
             }
     // Game is over, print the final board
@@ -52,13 +53,12 @@ class TTT
 	System.out.print("It is Player " + turn + "'s turn. Move: ");
 	int move = scanner.nextInt();
     char moveChar;
-	if(!isLegalMove(move))
+    if(!isLegalMove(move))
     {
         System.out.println("That move is not legal. Try again.");
         makeMove(turn);
     }
-    else
-    {
+    else{
         if(turn == 1){
 		moveChar = 'X';
         }else{
@@ -70,6 +70,8 @@ class TTT
     // Return true if the move is legal, given the current boar[]
     private boolean isLegalMove(int move)
     {
+	if(move < 0) return false;
+	if(move > 9) return false;
 	if(board[move-1] == 'X' || board[move-1] == 'O')
 	    {
 		return false;
@@ -80,16 +82,26 @@ class TTT
 	    }
     }
 
+    private int isThereAWinner()
+    {
+	//winnner
+	//return 1 or 2
+	
+	// game still going
+	// return 0
+	for(int i = 0; i < 9; i++)
+	    {
+		if(board[i] == '') return 0;
+	    }
+	// game over/ tie
+	// return 3
+	
+    }
+
+    
     private boolean gameOver()
     {
-	for(int i = 1; i < board.length + 1; i++)
-        {
-            if(isLegalMove(i))
-            {
-                return false;
-            }
-        }
-    return true;
+	return false;
     }
 
 
