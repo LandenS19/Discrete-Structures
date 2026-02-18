@@ -92,7 +92,9 @@ class TTT
     }
     //winnner
 	//return 1 or 2
-	// check(c);
+	int winner = check(c);
+    if(winner == 1) return 1;
+    if(winner == 2) return 2;
 	// game still going
 	// return 0
 	for(int i = 0; i < 9; i++)
@@ -104,6 +106,11 @@ class TTT
 	return 3;
     }
 
+    private int check(char c)
+    {
+    // Check for winner here
+    return 0;
+    }
     
     private boolean gameOver()
     {
