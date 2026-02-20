@@ -5,6 +5,11 @@
 
 class GameTree
 {
+    Node rootNode; // The current game board
 
+    public GameTree(char[] board){
+	rootNode = new Node();
+
+    }
     
 }

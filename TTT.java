@@ -37,13 +37,27 @@ class TTT
 	    {
 		printBoard();
 		makeMove(turn); // Player makes a  move
-		isThereAWinner(turn);
 		turn = 3 - turn;
             }
     // Game is over, print the final board
-    printBoard();
-    System.out.println("Game over!");
+	int winner = isThereAWinner();
+	announce(winner);
     }
+    
+    /**
+     * Method to announce who the winner is
+     */
+    private void announce(int winner){
+	printBoard();
+	if(winner == 0){
+	    System.out.println("Crittical Error! No winner.");
+        } else if(winner == 1){
+	    System.out.println("Congrats Player 1!");
+	} else if(winner == 2){
+	    System.out.println("Congrats Player 2!");
+	} else System.out.println("Too bad! You both lose!");
+    }
+	    
 
     /**
      * Player 1 is X, Player 2 is O
@@ -83,18 +97,12 @@ class TTT
     }
 
     // Checks if there is a winner and returns 1 for player 1, 2 for player 2, 0 for game still going and 3 for a tie
-    private int isThereAWinner(int turn)
+    private int isThereAWinner()
     {
-    char c;
-    if (turn == 1) {
-        c = 'X';
-    } else {
-        c = 'O';
-    }
     //winnner
-	//return 1 or 2
-    if((check(c, 1) || check(c, 2) || check(c, 3)) && turn == 1) return 1;  // Check for winner in horizontal, vertical and diagonal lines returns 1 if it is player 1 move
-    if((check(c, 1) || check(c, 2) || check(c, 3)) && turn == 2) return 2;  // Check for winner in horizontal, vertical and diagonal lines returns 2 if it is player 2 move
+    //return 1 or 2
+    if(check('X')) return 1;  // Check for winner in horizontal, vertical and diagonal lines returns 1 if it is player 1 move
+    if(check('O')) return 2;  // Check for winner in horizontal, vertical and diagonal lines returns 2 if it is player 2 move
 
     // no winner yet so check if game still going or tie
     // check if there is any available tiles left and return 0 for the game still going and if not return 3 for a tie
@@ -106,45 +114,39 @@ class TTT
     }
 
     // Check for winner in horizontal, vertical and diagonal lines
-    private boolean check(char c, int checkType)
+    private boolean check(char c)
     {
     // Check for horizontal lines
-    if(checkType == 1)
-    {
-        for(int i = 0; i <= 6; i+=3)
-        {
-            if(board[i] == c && board[i+1] == c && board[i+2] == c)
-            {
-                return true;
-            }
-        }
-    }
+    for(int i = 0; i <= 6; i+=3)
+       {
+       if(board[i] == c && board[i+1] == c && board[i+2] == c)
+	   {
+	       return true;
+           }
+       }
     // Check for vertical lines
-    if(checkType == 2)
-    {
-        for(int i = 0; i <= 2; i++)
+    for(int i = 0; i <= 2; i++)
         {
-            if(board[i] == c && board[i+3] == c && board[i+6] == c)
-            {
+        if(board[i] == c && board[i+3] == c && board[i+6] == c)
+	    {
                 return true;
             }
         }
-    }
     // Check for diagonal lines
-   if(checkType == 3)
-   {
-        // Check for diagonal \
-        if(board[0] == c && board[4] == c && board[8] == c) return true;        
-        // Check for diagonal /
-        if(board[2] == c && board[4] == c && board[6] == c) return true;
-   }
+    // Check for diagonal \
+    if(board[0] == c && board[4] == c && board[8] == c) return true;        
+    // Check for diagonal /
+    if(board[2] == c && board[4] == c && board[6] == c) return true;
 
+    // No winner so return false
     return false;
-}
+    }
     
     private boolean gameOver()
     {
-	return false;
+	int winner = isThereAWinner();
+	if(winner == 0) return false;
+        return true;
     }
 
 

@@ -3,8 +3,8 @@
  */
 import java.util.ArrayList;
 
-class Node
-{
+class Node{
+    char[] board; // The board in this node
     ArrayList<Node> children;
 
 }
