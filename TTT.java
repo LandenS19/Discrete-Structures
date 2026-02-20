@@ -92,10 +92,9 @@ class TTT
     }
     //winnner
 	//return 1 or 2
-    if((check(c, 1) || check(c, 2)) && turn == 1) return 1;  // Check for winner in horizontal and vertical lines returns 1 if it is player 1 move
-    if((check(c, 1) || check(c, 2)) && turn == 2) return 2;  // Check for winner in horizontal and vertical lines returns 2 if it is player 2 move
-    // WORK ON THIS PART!
-    // ^^ These also needs to check for the diagonal as well by doing check(c, 3)
+    if((check(c, 1) || check(c, 2) || check(c, 3)) && turn == 1) return 1;  // Check for winner in horizontal, vertical and diagonal lines returns 1 if it is player 1 move
+    if((check(c, 1) || check(c, 2) || check(c, 3)) && turn == 2) return 2;  // Check for winner in horizontal, vertical and diagonal lines returns 2 if it is player 2 move
+
     // no winner yet so check if game still going or tie
     // check if there is no available tiles left and return 3 for tie else it is still going and return 0
     for(int i = 1; i <= 9; i++) // Loop through the board to check if there are any available tiles left
@@ -133,6 +132,14 @@ class TTT
     /* add another if to check for the diagonal rows here will probably need to have 2 seperate ones for the 2 diagonals
     * Just do the same thing as the horizontal and vertical checks but with the diagonal indices
     * These don't need to be a loop just 2 if statements checking if 0,4,8 or 2,4,6 are all the same character like done in the other checks */
+   if(checkType == 3)
+   {
+        // Check for diagonal 1
+
+        // Check for diagonal 2
+
+   }
+
     return false;
 }
     
