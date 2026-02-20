@@ -92,23 +92,49 @@ class TTT
     }
     //winnner
 	//return 1 or 2
-    
-	// game still going
-	// return 0
-	for(int i = 0; i < 9; i++)
-	    {
-		if(board[i] == '-') return 0;
-	    }
-	// game over/ tie
-	// return 3
-	return 3;
+    if((check(c, 1) || check(c, 2)) && turn == 1) return 1;  // Check for winner in horizontal and vertical lines returns 1 if it is player 1 move
+    if((check(c, 1) || check(c, 2)) && turn == 2) return 2;  // Check for winner in horizontal and vertical lines returns 2 if it is player 2 move
+    // WORK ON THIS PART!
+    // ^^ These also needs to check for the diagonal as well by doing check(c, 3)
+    // no winner yet so check if game still going or tie
+    // check if there is no available tiles left and return 3 for tie else it is still going and return 0
+    for(int i = 1; i <= 9; i++) // Loop through the board to check if there are any available tiles left
+    {
+        if(isLegalMove(i)) return 0; // If there is an available tile left then the game is still going and return 0
+    }
+	return 3; // If no available tiles left, return 3 for a tie
     }
 
-    private int check(char c)
+    private boolean check(char c, int checkType)
     {
     // Check for winner here
-    return 0;
+    if(checkType == 1)
+    {
+        for(int i = 0; i <= 6; i+=3)
+        {
+            if(board[i] == c && board[i+1] == c && board[i+2] == c)
+            {
+                return true;
+            }
+        }
     }
+    if(checkType == 2)
+    {
+        for(int i = 0; i <= 2; i++)
+        {
+            if(board[i] == c && board[i+3] == c && board[i+6] == c)
+            {
+                return true;
+            }
+        }
+
+    }
+    // WORK ON THIS PART
+    /* add another if to check for the diagonal rows here will probably need to have 2 seperate ones for the 2 diagonals
+    * Just do the same thing as the horizontal and vertical checks but with the diagonal indices
+    * These don't need to be a loop just 2 if statements checking if 0,4,8 or 2,4,6 are all the same character like done in the other checks */
+    return false;
+}
     
     private boolean gameOver()
     {
