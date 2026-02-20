@@ -70,7 +70,7 @@ class TTT
     // Return true if the move is legal, given the current boar[]
     private boolean isLegalMove(int move)
     {
-	if(move < 0) return false;
+	if(move <= 0) return false;
 	if(move > 9) return false;
 	if(board[move-1] == 'X' || board[move-1] == 'O')
 	    {
@@ -82,6 +82,7 @@ class TTT
 	    }
     }
 
+    // Checks if there is a winner and returns 1 for player 1, 2 for player 2, 0 for game still going and 3 for a tie
     private int isThereAWinner(int turn)
     {
     char c;
@@ -96,7 +97,7 @@ class TTT
     if((check(c, 1) || check(c, 2) || check(c, 3)) && turn == 2) return 2;  // Check for winner in horizontal, vertical and diagonal lines returns 2 if it is player 2 move
 
     // no winner yet so check if game still going or tie
-    // check if there is no available tiles left and return 3 for tie else it is still going and return 0
+    // check if there is any available tiles left and return 0 for the game still going and if not return 3 for a tie
     for(int i = 1; i <= 9; i++) // Loop through the board to check if there are any available tiles left
     {
         if(isLegalMove(i)) return 0; // If there is an available tile left then the game is still going and return 0
@@ -104,9 +105,10 @@ class TTT
 	return 3; // If no available tiles left, return 3 for a tie
     }
 
+    // Check for winner in horizontal, vertical and diagonal lines
     private boolean check(char c, int checkType)
     {
-    // Check for winner here
+    // Check for horizontal lines
     if(checkType == 1)
     {
         for(int i = 0; i <= 6; i+=3)
@@ -117,6 +119,7 @@ class TTT
             }
         }
     }
+    // Check for vertical lines
     if(checkType == 2)
     {
         for(int i = 0; i <= 2; i++)
@@ -126,18 +129,14 @@ class TTT
                 return true;
             }
         }
-
     }
-    // WORK ON THIS PART
-    /* add another if to check for the diagonal rows here will probably need to have 2 seperate ones for the 2 diagonals
-    * Just do the same thing as the horizontal and vertical checks but with the diagonal indices
-    * These don't need to be a loop just 2 if statements checking if 0,4,8 or 2,4,6 are all the same character like done in the other checks */
+    // Check for diagonal lines
    if(checkType == 3)
    {
-        // Check for diagonal 1
-
-        // Check for diagonal 2
-
+        // Check for diagonal \
+        if(board[0] == c && board[4] == c && board[8] == c) return true;        
+        // Check for diagonal /
+        if(board[2] == c && board[4] == c && board[6] == c) return true;
    }
 
     return false;
