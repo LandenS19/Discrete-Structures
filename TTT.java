@@ -100,12 +100,10 @@ class TTT
     private int isThereAWinner()
     {
     //winnner
-    //return 1 or 2
     if(check('X')) return 1;  // Check for winner in horizontal, vertical and diagonal lines returns 1 if it is player 1 move
     if(check('O')) return 2;  // Check for winner in horizontal, vertical and diagonal lines returns 2 if it is player 2 move
 
     // no winner yet so check if game still going or tie
-    // check if there is any available tiles left and return 0 for the game still going and if not return 3 for a tie
     for(int i = 1; i <= 9; i++) // Loop through the board to check if there are any available tiles left
     {
         if(isLegalMove(i)) return 0; // If there is an available tile left then the game is still going and return 0
