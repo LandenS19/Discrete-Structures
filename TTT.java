@@ -1,10 +1,9 @@
 import java.util.Scanner;
 
 
-class TTT
-{
+class TTT implements IntelligentGame {
     char[] board;
-
+    
     Scanner scanner;  // declare a Scanner field
 
     public static void main(String[] args)
