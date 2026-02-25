@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 class TTT implements IntelligentGame {
     char[] board;
-    
     Scanner scanner;  // declare a Scanner field
+    String[] playerType; // Human or Computer
 
     public static void main(String[] args)
     {
@@ -23,6 +23,8 @@ class TTT implements IntelligentGame {
     {
 	// Initialize an array literal
 	board = new char[]{'1','2','3','4','5','6','7','8','9'};
+
+	playerType = new String[] {"", "Human", "Computer"};
 
 	// Instantiate a new scanner
 	scanner = new Scanner(System.in);
@@ -63,8 +65,13 @@ class TTT implements IntelligentGame {
      */
     private void makeMove(int turn)
     {
+	int move;
 	System.out.print("It is Player " + turn + "'s turn. Move: ");
-	int move = scanner.nextInt();
+	
+	if(playerType[turn].equals("Human"))
+	     move = scanner.nextInt();
+	else
+	     move = getComputerMove(turn);
     char moveChar;
     if(!isLegalMove(move))
     {
@@ -80,6 +87,19 @@ class TTT implements IntelligentGame {
     board[(move-1)] = moveChar;
     }
     }
+
+    /**
+     * Get a move from the computer
+     * Builds a game tree and selects a best move
+     */
+    private int getComputerMove(int turn){
+	GameTree gt = new GameTree(board, turn, this);
+	gt.evaluate();
+	childBoard = gt.selectBestChild(int turn);
+	int moveToMake = moveToGetHere(childBoard);
+	return MoveToMake;
+    }
+    
     // Return true if the move is legal, given the current boar[]
     private boolean isLegalMove(int move)
     {

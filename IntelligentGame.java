@@ -1,9 +1,11 @@
 /**
  * Methods that enable a game tree to be built and evaluated
  */
+import java.util.ArrayList;
+
 
 interface IntelligentGame {
-    XXX getChildren(char[] board);
+    ArrayList<char[]> getChildren(char[] board);
 
     // Return 0 for still playing, 1 or 2 for winner, 3 for tie
     int evaluateBoard(char[] board);
