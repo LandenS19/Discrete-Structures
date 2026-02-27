@@ -115,17 +115,15 @@ class TTT implements IntelligentGame {
 	    }
     }
 
-    // Checks if there is a winner and returns 1 for player 1, 2 for player 2, 0 for game still going and 3 for a tie
     private int isThereAWinner()
     {
     //winnner
-    if(check('X')) return 1;  // Check for winner in horizontal, vertical and diagonal lines returns 1 if it is player 1 move
-    if(check('O')) return 2;  // Check for winner in horizontal, vertical and diagonal lines returns 2 if it is player 2 move
-
+    if(check('X')) return 1;  
+    if(check('O')) return 2;  
     // no winner yet so check if game still going or tie
     for(int i = 1; i <= 9; i++) // Loop through the board to check if there are any available tiles left
     {
-        if(isLegalMove(i)) return 0; // If there is an available tile left then the game is still going and return 0
+        if(isLegalMove(i)) return 0;
     }
 	return 3; // If no available tiles left, return 3 for a tie
     }
@@ -175,4 +173,22 @@ class TTT implements IntelligentGame {
 			  + board[6] + "|" + board[7] + "|" + board[8] );
     }       
 
+    /********************
+     * Tree-Building Things
+     ********************/
+    public ArrayList<char[]> getChildren(char[] board, int turn){
+
+	ArrayList<char[]> childBoards = new ArrayList<>();
+	
+	for(int i = 0; i < 9; i++;){
+	    int move = i + 1;
+	    if(!(board[i] == 'X' || board[i] == 'O')){
+		    char newBoard[9]; // new board
+		    for(int j = 0; j < 9; j++) newBoard[j] = board[j]; // copy
+		    newBoard[i] = (turn == 1 ? 'X' : 'O'); // make the move
+		    childBoards.add(newBoard);
+	    }
+	}
+	return childBoards;
+    }
 }
