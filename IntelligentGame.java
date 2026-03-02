@@ -1,4 +1,5 @@
 /**
+   (Interface)
  * Methods that enable a game tree to be built and evaluated
  */
 import java.util.ArrayList;

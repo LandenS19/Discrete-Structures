@@ -99,6 +99,17 @@ class TTT implements IntelligentGame {
 	int moveToMake = moveToGetHere(childBoard);
 	return MoveToMake;
     }
+
+    // Look at the current board, and figure out
+    // what move to make to get here
+    private int moveToGetHere(char[] child){
+	for(int i = 0; i < 9; i++){
+	    if(board[i] != child[i]){
+		return i+1;
+	    }
+	}
+	return -1; // Disaster has struck	    
+    }
     
     // Return true if the move is legal, given the current boar[]
     private boolean isLegalMove(int move)

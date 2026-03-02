@@ -6,9 +6,11 @@ import java.util.ArrayList;
 class Node{
     char[] board; // The board in this node
     int turn; // Whose turn it is
+    int winner; // Is this node I, II, or III, for who wins?
     ArrayList<Node> children;
 
     public Node(){
-	children = new ArrayList<>();
+	this.children = new ArrayList<>();
+	this.winner = -1; // No value
     }
 }
