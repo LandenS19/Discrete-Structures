@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 
 interface IntelligentGame {
-    ArrayList<char[]> getChildren(char[] board);
+    ArrayList<char[]> getChildren(char[] board, int turn);
 
     // Return 0 for still playing, 1 or 2 for winner, 3 for tie
-    int evaluateBoard(char[] board);
+    // int evaluateBoard(char[] board);
 
     // Return 1 or 2 for winner, 3 for tie
     int evaluateNode(Node n, int turn);
+
+    // Return 1, 2 or 3
+    int isThereAWinner(char[] board);
 }

@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 class TTT implements IntelligentGame {
     char[] board;
@@ -41,7 +41,7 @@ class TTT implements IntelligentGame {
 		turn = 3 - turn;
             }
     // Game is over, print the final board
-	int winner = isThereAWinner();
+	int winner = isThereAWinner(board);
 	announce(winner);
     }
     
@@ -73,7 +73,7 @@ class TTT implements IntelligentGame {
 	else
 	     move = getComputerMove(turn);
     char moveChar;
-    if(!isLegalMove(move))
+    if(!isLegalMove(move, board))
     {
         System.out.println("That move is not legal. Try again.");
         makeMove(turn);
@@ -95,9 +95,9 @@ class TTT implements IntelligentGame {
     private int getComputerMove(int turn){
 	GameTree gt = new GameTree(board, turn, this);
 	gt.evaluate();
-	childBoard = gt.selectBestChild(int turn);
+	char[] childBoard = gt.selectBestChild(turn);
 	int moveToMake = moveToGetHere(childBoard);
-	return MoveToMake;
+	return moveToMake;
     }
 
     // Look at the current board, and figure out
@@ -112,11 +112,11 @@ class TTT implements IntelligentGame {
     }
     
     // Return true if the move is legal, given the current boar[]
-    private boolean isLegalMove(int move)
+    private boolean isLegalMove(int move, char[] b)
     {
 	if(move <= 0) return false;
 	if(move > 9) return false;
-	if(board[move-1] == 'X' || board[move-1] == 'O')
+	if(b[move-1] == 'X' || b[move-1] == 'O')
 	    {
 		return false;
 	    }
@@ -126,26 +126,26 @@ class TTT implements IntelligentGame {
 	    }
     }
 
-    private int isThereAWinner()
+    public int isThereAWinner(char[] b)
     {
-    //winnner
-    if(check('X')) return 1;  
-    if(check('O')) return 2;  
+	//winnner
+	if(check('X', b)) return 1;  
+	if(check('O', b)) return 2;  
     // no winner yet so check if game still going or tie
     for(int i = 1; i <= 9; i++) // Loop through the board to check if there are any available tiles left
     {
-        if(isLegalMove(i)) return 0;
+        if(isLegalMove(i, b)) return 0;
     }
 	return 3; // If no available tiles left, return 3 for a tie
     }
 
     // Check for winner in horizontal, vertical and diagonal lines
-    private boolean check(char c)
+    private boolean check(char c, char[] b)
     {
     // Check for horizontal lines
     for(int i = 0; i <= 6; i+=3)
        {
-       if(board[i] == c && board[i+1] == c && board[i+2] == c)
+       if(b[i] == c && b[i+1] == c && b[i+2] == c)
 	   {
 	       return true;
            }
@@ -153,16 +153,16 @@ class TTT implements IntelligentGame {
     // Check for vertical lines
     for(int i = 0; i <= 2; i++)
         {
-        if(board[i] == c && board[i+3] == c && board[i+6] == c)
+        if(b[i] == c && b[i+3] == c && b[i+6] == c)
 	    {
                 return true;
             }
         }
     // Check for diagonal lines
     // Check for diagonal \
-    if(board[0] == c && board[4] == c && board[8] == c) return true;        
+    if(b[0] == c && b[4] == c && b[8] == c) return true;        
     // Check for diagonal /
-    if(board[2] == c && board[4] == c && board[6] == c) return true;
+    if(b[2] == c && b[4] == c && b[6] == c) return true;
 
     // No winner so return false
     return false;
@@ -170,7 +170,7 @@ class TTT implements IntelligentGame {
     
     private boolean gameOver()
     {
-	int winner = isThereAWinner();
+	int winner = isThereAWinner(board);
 	if(winner == 0) return false;
         return true;
     }
@@ -191,15 +191,19 @@ class TTT implements IntelligentGame {
 
 	ArrayList<char[]> childBoards = new ArrayList<>();
 	
-	for(int i = 0; i < 9; i++;){
+	for(int i = 0; i < 9; i++){
 	    int move = i + 1;
 	    if(!(board[i] == 'X' || board[i] == 'O')){
-		    char newBoard[9]; // new board
+		    char newBoard[] = new char[9]; // new board
 		    for(int j = 0; j < 9; j++) newBoard[j] = board[j]; // copy
 		    newBoard[i] = (turn == 1 ? 'X' : 'O'); // make the move
 		    childBoards.add(newBoard);
 	    }
 	}
 	return childBoards;
+    }
+
+    public int evaluateNode(Node n, int turn){
+	return 0;
     }
 }
