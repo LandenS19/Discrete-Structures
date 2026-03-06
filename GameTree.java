@@ -9,8 +9,9 @@ class GameTree
     IntelligentGame game; // The game that we are playing inside of
     
     public GameTree(char[] board, int turn, IntelligentGame game){
-	this.rootNode = buildTree(board, turn);
 	this.game = game;
+	this.rootNode = buildTree(board, turn);
+
     }
     
     /**

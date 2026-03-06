@@ -190,6 +190,7 @@ class TTT implements IntelligentGame {
     public ArrayList<char[]> getChildren(char[] board, int turn){
 
 	ArrayList<char[]> childBoards = new ArrayList<>();
+	// Check if the board is a winner if yes return an empyt array list.
 	
 	for(int i = 0; i < 9; i++){
 	    int move = i + 1;
@@ -201,9 +202,5 @@ class TTT implements IntelligentGame {
 	    }
 	}
 	return childBoards;
-    }
-
-    public int evaluateNode(Node n, int turn){
-	return 0;
     }
 }
