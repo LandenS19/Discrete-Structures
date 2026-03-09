@@ -1,18 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-class TTT implements IntelligentGame {
-    char[] board;
-    Scanner scanner;  // declare a Scanner field
-    String[] playerType; // Human or Computer
-
-    public static void main(String[] args)
-    {
-	TTT ttt = new TTT();
-	// Play the game
-	ttt.play();
-    }
-
+class TTT extends TwoPlayerGame implements IntelligentGame {
     /**
      * Constructors always:
      *   1. Have the same name as the class
@@ -28,21 +17,6 @@ class TTT implements IntelligentGame {
 
 	// Instantiate a new scanner
 	scanner = new Scanner(System.in);
-    }
-
-    private void play()
-    {
-	int turn = 1; // Player 1 starts the game
-	
-	while(!gameOver())
-	    {
-		printBoard();
-		makeMove(turn); // Player makes a  move
-		turn = 3 - turn;
-            }
-    // Game is over, print the final board
-	int winner = isThereAWinner(board);
-	announce(winner);
     }
     
     /**
@@ -63,29 +37,28 @@ class TTT implements IntelligentGame {
     /**
      * Player 1 is X, Player 2 is O
      */
-    private void makeMove(int turn)
-    {
+    private void makeMove(int turn){
 	int move;
 	System.out.println("It is Player " + turn + "'s turn. Move: ");
 	
 	if(playerType[turn].equals("Human"))
-	     move = scanner.nextInt();
+	    move = scanner.nextInt();
 	else
-	     move = getComputerMove(turn);
-    char moveChar;
-    if(!isLegalMove(move, board))
-    {
-        System.out.println("That move is not legal. Try again.");
-        makeMove(turn);
-    }
-    else{
-        if(turn == 1){
+	    move = getComputerMove(turn);
+	char moveChar;
+	if(!isLegalMove(move, board))
+	    {
+		System.out.println("That move is not legal. Try again.");
+		makeMove(turn);
+	    }
+	else{
+	    if(turn == 1){
 		moveChar = 'X';
-        }else{
+	    }else{
 		moveChar = 'O';
-        }
-    board[(move-1)] = moveChar;
-    }
+	    }
+	    board[(move-1)] = moveChar;
+	}
     }
 
     /**
@@ -140,8 +113,7 @@ class TTT implements IntelligentGame {
     }
 
     // Check for winner in horizontal, vertical and diagonal lines
-    private boolean check(char c, char[] b)
-    {
+    private boolean check(char c, char[] b){
     // Check for horizontal lines
     for(int i = 0; i <= 6; i+=3)
        {
@@ -167,15 +139,9 @@ class TTT implements IntelligentGame {
     // No winner so return false
     return false;
     }
-    
-    private boolean gameOver()
-    {
-	int winner = isThereAWinner(board);
-	if(winner == 0) return false;
-        return true;
-    }
 
-
+    // This overides the abstract meathod in TwoPlayerGame
+    @Override
     private void printBoard()
     {
         // Print the board in a readable format
