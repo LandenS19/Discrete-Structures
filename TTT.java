@@ -66,7 +66,7 @@ class TTT implements IntelligentGame {
     private void makeMove(int turn)
     {
 	int move;
-	System.out.print("It is Player " + turn + "'s turn. Move: ");
+	System.out.println("It is Player " + turn + "'s turn. Move: ");
 	
 	if(playerType[turn].equals("Human"))
 	     move = scanner.nextInt();
@@ -179,7 +179,7 @@ class TTT implements IntelligentGame {
     private void printBoard()
     {
         // Print the board in a readable format
-	System.out.println(board[0] + "|" + board[1] + "|" + board[2] + "\n"
+	System.out.println("\n" + board[0] + "|" + board[1] + "|" + board[2] + "\n"
 			  + board[3] + "|" + board[4] + "|" +board[5] + "\n"
 			  + board[6] + "|" + board[7] + "|" + board[8] );
     }       
@@ -190,10 +190,10 @@ class TTT implements IntelligentGame {
     public ArrayList<char[]> getChildren(char[] board, int turn){
 
 	ArrayList<char[]> childBoards = new ArrayList<>();
-	// Check if the board is a winner if yes return an empyt array list.
+	// Check if the board is a winner or full if yes return an empyt array list.
+    if(isThereAWinner(board) == 1 || isThereAWinner(board) == 2) return childBoards;
 	
 	for(int i = 0; i < 9; i++){
-	    int move = i + 1;
 	    if(!(board[i] == 'X' || board[i] == 'O')){
 		    char newBoard[] = new char[9]; // new board
 		    for(int j = 0; j < 9; j++) newBoard[j] = board[j]; // copy
