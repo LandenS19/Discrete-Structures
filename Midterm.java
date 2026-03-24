@@ -197,9 +197,23 @@ public class Midterm {
     // ["abcd", "dabc", "cdab", "bcda"]
     static ArrayList<String> allRotations(String s){
         // Your work here
-        
+        int length = s.length();  // Get the length of the string to use for looping
+        char[] word = s.toCharArray();  // Convert the string to a char[]
+        ArrayList<String> rotStrings = new ArrayList<>();  // Create the new arraylist for the rotations
+        rotStrings.add(s);   // Add the origional string to the array list.
+        for(int m = 0; m < length-1; m++){ // Do one shift less than the length because we add the first one imedietly.
+            String newWord = "";   // Create an empty string every loop
+            for(int w = 0; w < length; w++){   // Loops through the string for the amount of chars there are
+                if(w==0){                      // IF this is the first letter
+                    newWord += word[length-1];  // Add the last char of the char[] to newWord
+                }
+                else newWord += word[w-1];      // Else add the char to the left to newWord
+            }
+            rotStrings.add(newWord);           // Adds the string to the list of rotations
+            word = newWord.toCharArray();      // Sets the new word to our charArray
+        }   
         // Replace the line below with a proper return statement
-        return new ArrayList<>();
+        return rotStrings; // Returns our arraylist of strings
     }
 
 
@@ -230,8 +244,7 @@ public class Midterm {
         if(a >= 0 &&  b == 0) return 1;
         if(a == b && a >= 0) return 1;
         // Replace the line below so that it returns the right answer
-        if(a >= b) return flamingo(a-1, b) + flamingo(a, b-1);
-        return -1; //error happened
+        return flamingo(a-1, b) + flamingo(a, b-1);
     }
 
 }
