@@ -38,27 +38,27 @@ class TTT extends TwoPlayerGame implements IntelligentGame {
      * Player 1 is X, Player 2 is O
      */
     private void makeMove(int turn){
-	int move;
-	System.out.println("It is Player " + turn + "'s turn. Move: ");
-	
-	if(playerType[turn].equals("Human"))
-	    move = scanner.nextInt();
-	else
-	    move = getComputerMove(turn);
-	char moveChar;
-	if(!isLegalMove(move, board))
-	    {
-		System.out.println("That move is not legal. Try again.");
-		makeMove(turn);
-	    }
-	else{
-	    if(turn == 1){
-		moveChar = 'X';
-	    }else{
-		moveChar = 'O';
-	    }
-	    board[(move-1)] = moveChar;
-	}
+        int move;
+        System.out.println("It is Player " + turn + "'s turn. Move: ");
+        
+        if(playerType[turn].equals("Human"))
+            move = scanner.nextInt();
+        else
+            move = getComputerMove(turn);
+        char moveChar;
+        if(!isLegalMove(move, board))
+            {
+            System.out.println("That move is not legal. Try again.");
+            makeMove(turn);
+            }
+        else{
+            if(turn == 1){
+            moveChar = 'X';
+            }else{
+            moveChar = 'O';
+            }
+            board[(move-1)] = moveChar;
+        }
     }
 
     /**
@@ -155,18 +155,18 @@ class TTT extends TwoPlayerGame implements IntelligentGame {
      ********************/
     public ArrayList<char[]> getChildren(char[] board, int turn){
 
-	ArrayList<char[]> childBoards = new ArrayList<>();
-	// Check if the board is a winner or full if yes return an empyt array list.
-    if(isThereAWinner(board) == 1 || isThereAWinner(board) == 2) return childBoards;
-	
-	for(int i = 0; i < 9; i++){
-	    if(!(board[i] == 'X' || board[i] == 'O')){
-		    char newBoard[] = new char[9]; // new board
-		    for(int j = 0; j < 9; j++) newBoard[j] = board[j]; // copy
-		    newBoard[i] = (turn == 1 ? 'X' : 'O'); // make the move
-		    childBoards.add(newBoard);
-	    }
-	}
-	return childBoards;
+        ArrayList<char[]> childBoards = new ArrayList<>();
+        // Check if the board is a winner or full if yes return an empyt array list.
+        if(isThereAWinner(board) == 1 || isThereAWinner(board) == 2) return childBoards;
+        
+        for(int i = 0; i < 9; i++){
+            if(!(board[i] == 'X' || board[i] == 'O')){
+                char newBoard[] = new char[9]; // new board
+                for(int j = 0; j < 9; j++) newBoard[j] = board[j]; // copy
+                newBoard[i] = (turn == 1 ? 'X' : 'O'); // make the move
+                childBoards.add(newBoard);
+            }
+        }
+        return childBoards;
     }
 }
