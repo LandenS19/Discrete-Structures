@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Midterm {
-    static char[] before;
     public static void main(String[] args) {
         int randSeed = 12783;
         Random rand = new Random(randSeed);
@@ -96,7 +95,7 @@ public class Midterm {
 
         // Question 7
         // Write the wrapRight() function below. Here is a test:
-        before = new char[] {'1', '2', '3', '4', '5', '6'};
+        char[] before = new char[] {'1', '2', '3', '4', '5', '6'};
         char[] after1 = new char[] {'3', '1', '2', '6', '4', '5'};
         char[] after2 = new char[] {'1', '3', '6', '2', '5', '4'};
         wrapRight(2, 3, before);
@@ -187,8 +186,10 @@ public class Midterm {
             }
             else nb[i+1] = board[i];
         }
-        System.out.println(nb);
-        before = nb;
+        // System.out.println(nb);
+        for(int z = 0; z < w*h; z++){
+            board[z] = nb[z];
+        }
     }
 
     // This function takes a string as input, and produces an ArrayList<String>  of
