@@ -129,10 +129,10 @@ public class Midterm {
 
         // Question 10
         // Write the flamingo() function below. Here are some tests:
-        System.out.println("This number should be 10: " + flamingo(5, 2));
+        System.out.println("This number should be 13: " + flamingo(5, 2));
         System.out.println("This number should be 1: " + flamingo(5, 5));
-        System.out.println("This number should be 20: " + flamingo(6, 3));
-        System.out.println("This number should be 56: " + flamingo(8, 5));
+        System.out.println("This number should be 41: " + flamingo(6, 3));
+        System.out.println("This number should be 428: " + flamingo(8, 5));
     }
 
 
@@ -158,13 +158,13 @@ public class Midterm {
     static int readUntilGood(int upperLimit){
         // Your work here.
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter your age: "); // This prompts the user to enter thier age
-        int age = scanner.nextInt();                     // Reads the next integer input by the user
-        if(age >= 18 && age <= upperLimit){              // Checks if the age is in the valid range
+        System.out.println("Please enter your age: ");                // This prompts the user to enter thier age
+        int age = scanner.nextInt();                                    // Reads the next integer input by the user
+        if(age >= 18 && age <= upperLimit){                             // Checks if the age is in the valid range
             System.out.println("Access Granted! Valid age submitted!"); 
             return age;                                 // Returns the users age
         }
-        System.out.println("Acsess Denied! Invalid Age! \nPlease try again...");  // The age submited did not pass the check
+        System.out.println("Acsess Denied! Invalid Age! \nPlease try again...");   // The age submited did not pass the check
         return readUntilGood(upperLimit);                                            // Therefore call the meathod again.
     }
 
@@ -186,8 +186,7 @@ public class Midterm {
             }
             else nb[i+1] = board[i];
         }
-        // System.out.println(nb);
-        for(int z = 0; z < w*h; z++){
+        for(int z = 0; z < w*h; z++){  // Loop to change the elements of board to our elements of our newBoard
             board[z] = nb[z];
         }
     }
@@ -198,23 +197,23 @@ public class Midterm {
     // ["abcd", "dabc", "cdab", "bcda"]
     static ArrayList<String> allRotations(String s){
         // Your work here
-        int length = s.length();  // Get the length of the string to use for looping
-        char[] word = s.toCharArray();  // Convert the string to a char[]
-        ArrayList<String> rotStrings = new ArrayList<>();  // Create the new arraylist for the rotations
-        rotStrings.add(s);   // Add the origional string to the array list.
-        for(int m = 0; m < length-1; m++){ // Do one shift less than the length because we add the first one imedietly.
-            String newWord = "";   // Create an empty string every loop
-            for(int w = 0; w < length; w++){   // Loops through the string for the amount of chars there are
-                if(w==0){                      // IF this is the first letter
-                    newWord += word[length-1];  // Add the last char of the char[] to newWord
+        int length = s.length();                            // Get the length of the string to use for looping
+        char[] word = s.toCharArray();                      // Convert the string to a char[]
+        ArrayList<String> rotStrings = new ArrayList<>();   // Create the new arraylist for the rotations
+        rotStrings.add(s);                                  // Add the origional string to the array list.
+        for(int m = 0; m < length-1; m++){                  // Do one shift less than the length because we add the first one imedietly.
+            String newWord = "";                            // Create an empty string every loop
+            for(int w = 0; w < length; w++){                // Loops through the string for the amount of chars there are
+                if(w==0){                                   // IF this is the first letter
+                    newWord += word[length-1];              // Add the last char of the char[] to newWord
                 }
-                else newWord += word[w-1];      // Else add the char to the left to newWord
+                else newWord += word[w-1];                  // Else add the char to the left to newWord
             }
-            rotStrings.add(newWord);           // Adds the string to the list of rotations
-            word = newWord.toCharArray();      // Sets the new word to our charArray
+            rotStrings.add(newWord);                        // Adds the string to the list of rotations
+            word = newWord.toCharArray();                   // Sets the word to our newly created charArray
         }   
         // Replace the line below with a proper return statement
-        return rotStrings; // Returns our arraylist of strings
+        return rotStrings;                                  // Returns our arraylist of strings
     }
 
 
@@ -223,14 +222,14 @@ public class Midterm {
     // Such a number is called a "perfect" number.
     static boolean isPerfect(int n){
         // Your work here
-        int total = 0;   // Total variable to add all divisors of n
-        for(int a = 1; a < n; a++){  // Loop through all the integers where 0 < a > n
-            if(n%a == 0){      // Check to see if a is a divisor of n
-                total += a;    // Adds a to the total
+        int total = 0;                  // Total variable to add all divisors of n
+        for(int a = 1; a < n; a++){     // Loop through all the integers where 0 < a > n
+            if(n%a == 0){               // Check to see if a is a divisor of n
+                total += a;             // Adds a to the total
             }
         }
         // Replace the line below so that it returns the right answer
-        if(total == n) return true;   // Checks if the sum of the divisors is equal to n and returns true if it does
+        if(total == n) return true;     // Checks if the sum of the divisors is equal to n and returns true if it does
         return false;
     }
 
